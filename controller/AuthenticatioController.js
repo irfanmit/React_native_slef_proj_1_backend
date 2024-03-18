@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const generateRandomUsername = () => {
@@ -26,7 +26,7 @@ const signup = async (req, res, next) => {
       return res.status(400).json({ error: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new user
     const newUser = new User({
       username: generateRandomUsername(),
@@ -59,13 +59,13 @@ const login = async (req, res, next) => {
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
-  const isEqual = await bcrypt.compare(password, user.password);
-  if (!isEqual) {
-    const error = new Error("wrong password");
-    error.code = 401;
-    throw error;
-    console.log("login failed");
-  }
+  // const isEqual = await bcrypt.compare(password, user.password);
+  // if (!isEqual) {
+  //   const error = new Error("wrong password");
+  //   error.code = 401;
+  //   throw error;
+  //   console.log("login failed");
+  // }
 
   const token = jwt.sign(
     {

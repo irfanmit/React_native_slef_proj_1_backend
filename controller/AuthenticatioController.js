@@ -31,7 +31,7 @@ const signup = async (req, res, next) => {
     const newUser = new User({
       username: generateRandomUsername(),
       email,
-      password: hashedPassword,
+      password,
       mobileNo : mobileNo.replace("+91", "").replace(/\s/g, ""),
       expoPushToken: expoPushToken.data,
       Name,
@@ -50,22 +50,20 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  ////console.log("loging in...")
+  console.log("loging in...")
   const { email, password } = req.body;
-  ////console.log(password);
+  console.log(password, email);
 
   // Check if the user exists
   const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
-  // const isEqual = await bcrypt.compare(password, user.password);
-  // if (!isEqual) {
-  //   const error = new Error("wrong password");
-  //   error.code = 401;
-  //   throw error;
-  //   console.log("login failed");
-  // }
+  const isPasswordValid = user.comparePassword(password);
+  if (!isPasswordValid) {
+    console.log("wrong pass");
+    return res.status(401).json({ error: "Invalid password" });
+  }
 
   const token = jwt.sign(
     {

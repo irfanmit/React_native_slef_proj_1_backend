@@ -21,8 +21,11 @@ const signup = async (req, res, next) => {
 
   const DpUrl = "random";
 
+  if(!expoPushToken){
+    expoPushToken
+  }
 
-  console.log("expoPushToken ...............", expoPushToken.data);
+  console.log("expoPushToken ...............", expoPushToken);
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email: email });

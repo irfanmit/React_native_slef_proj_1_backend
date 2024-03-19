@@ -21,9 +21,9 @@ const signup = async (req, res, next) => {
 
   const DpUrl = "random";
 
-  if(!expoPushToken){
-    expoPushToken
-  }
+  // if(!expoPushToken){
+  //   expoPushToken
+  // }
 
   console.log("expoPushToken ...............", expoPushToken);
   try {

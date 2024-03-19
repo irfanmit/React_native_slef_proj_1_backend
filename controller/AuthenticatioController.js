@@ -17,15 +17,18 @@ const generateRandomUsername = () => {
 
 const signup = async (req, res, next) => {
   console.log("singin up...")
-  const { email, password, mobileNo, expoPushToken, Name } = req.body;
+  const { email, password, mobileNo, Name } = req.body;
 
+  let {expoPushToken} = req.body 
   const DpUrl = "random";
 
-  // if(!expoPushToken){
-  //   expoPushToken
-  // }
+  if(!expoPushToken){
+    expoPushToken = {
+      data : "random expo push token"
+    }
+  }
 
-  console.log("expoPushToken ...............", expoPushToken);
+  console.log("expoPushToken and data ...............", expoPushToken.data, expoPushToken);
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email: email });

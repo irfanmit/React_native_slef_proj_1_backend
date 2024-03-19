@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   expoPushToken : {
     type : String,
-    required : true
+    // required : true
   },
   Name : {
     type : String,

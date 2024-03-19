@@ -123,7 +123,7 @@ const editTask = async (req, res, next) => {
     }
 
     // Fetch updated list of items
-    const updatedItems = await to_do_model.find({currentUserId});
+    const updatedItems = await to_do_model.find({user :currentUserId});
 console.log(updatedItems);
     // Return the updated list of items
     return res.status(201).json(updatedItems);

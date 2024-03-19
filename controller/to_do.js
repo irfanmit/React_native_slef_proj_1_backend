@@ -123,10 +123,10 @@ const editTask = async (req, res, next) => {
     }
 
     // Fetch updated list of items
-    const updatedItems = await to_do_model.find();
+    const updatedItem = await to_do_model.find({id});
 
     // Return the updated list of items
-    return res.status(201).json(updatedItems);
+    return res.status(201).json(updatedItem);
   } catch (error) {
     console.error('Error editing task:', error);
     return res.status(500).json({ error: 'Server error' });

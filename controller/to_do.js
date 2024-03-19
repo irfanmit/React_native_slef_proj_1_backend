@@ -57,8 +57,8 @@ const toggleEvent = async (req, res, next) => {
 
 const taskDel = async (req, res, next) => {
   //console.log("deleting...........");
-  const { id } = req.body;
-  //console.log(id);
+  const { id, currentUserId } = req.body;
+  console.log("currentUserId " , currentUserId);
 
   try {
     const todoItem = await to_do_model.findById(id);
@@ -67,7 +67,7 @@ const taskDel = async (req, res, next) => {
       //console.log("Item deleted:", todoItem);
 
       // Fetch updated list of items
-      const updatedItems = await to_do_model.find();
+      const updatedItems = await to_do_model.find({user : currentUserId});
 
       // Return the updated list of items
       res.json(updatedItems);

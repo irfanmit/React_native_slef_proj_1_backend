@@ -107,8 +107,8 @@ const addTask = async (req, res, next) => {
 };
 
 const editTask = async (req, res, next) => {
-  const { id, task_des } = req.body;
-  //console.log("edifing......................");
+  const { id, task_des, currentUserId } = req.body;
+  console.log("currentUserId......................", currentUserId);
   try {
     // Use findByIdAndUpdate with $set to update only the task_des field
     const updatedTask = await to_do_model.findByIdAndUpdate(
@@ -123,10 +123,10 @@ const editTask = async (req, res, next) => {
     }
 
     // Fetch updated list of items
-    const updatedItem = await to_do_model.find({id});
-
+    const updatedItems = await to_do_model.find({currentUserId});
+console.log(updatedItems);
     // Return the updated list of items
-    return res.status(201).json(updatedItem);
+    return res.status(201).json(updatedItems);
   } catch (error) {
     console.error('Error editing task:', error);
     return res.status(500).json({ error: 'Server error' });

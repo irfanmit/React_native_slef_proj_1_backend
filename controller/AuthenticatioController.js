@@ -16,8 +16,12 @@ const generateRandomUsername = () => {
 };
 
 const signup = async (req, res, next) => {
-  ////console.log("singin up...")
+  console.log("singin up...")
   const { email, password, mobileNo, expoPushToken, Name } = req.body;
+
+  const DpUrl = "random";
+
+
   console.log("expoPushToken ...............", expoPushToken.data);
   try {
     // Check if the user already exists
@@ -35,6 +39,7 @@ const signup = async (req, res, next) => {
       mobileNo : mobileNo.replace("+91", "").replace(/\s/g, ""),
       expoPushToken: expoPushToken.data,
       Name,
+      DpUrl,
     });
     await newUser.save();
     console.log(newUser);
